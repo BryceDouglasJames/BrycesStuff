@@ -24,7 +24,7 @@ export class Navbar extends React.Component<{}, ToggleState> {
         const { toggled } = this.state;
 
         return (
-            <nav className="flex items-center justify-evenly flex-wrap bg-black p-6 grid grid-rows-2 lg:divide-y lg:divide-white">
+            <nav className="flex items-stretch w-full justify-evenly flex-wrap bg-black p-6 grid grid-rows-2 lg:divide-y lg:divide-white">
                 <div className="items-center text-white text-center text-3xl p-5">
                     <h1>Bryce James</h1>
                 </div>
@@ -53,12 +53,14 @@ export class Navbar extends React.Component<{}, ToggleState> {
                             </Link>
                         </li>
                         <li className="nav-item m-auto p-auto">
-                            <a
-                                className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
-                                href="#pablo"
-                            >
-                                Projects
-                            </a>
+                            <Link to="projects">
+                                <a
+                                    className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
+                                    href="#pablo"
+                                >
+                                    Projects
+                                </a>
+                            </Link>
                         </li>
                         <li className="nav-item m-auto p-auto">
                             <Link to="/coolstuff/home">
