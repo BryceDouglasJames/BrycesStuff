@@ -31,8 +31,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "preinstall": "npx npm-force-resolutions",
-    "postinstall": "craco build"
+    "preinstall": "npx npm-force-resolutions"
   },
   "eslintConfig": {
     "extends": [
