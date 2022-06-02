@@ -33,7 +33,7 @@ let object_map = new Map();
 const orb = new OrbitControls(camera, renderer.domElement)
 
 
-function renderObj_With_Texture(loader: OBJLoader, scene: THREE.Scene, matloader: MTLLoader) {
+/*function renderObj_With_Texture(loader: OBJLoader, scene: THREE.Scene, matloader: MTLLoader) {
     matloader
         .load("me_material.mtl",
             (material) => {
@@ -97,7 +97,7 @@ function renderObj_With_Texture(loader: OBJLoader, scene: THREE.Scene, matloader
          function (error) {
              console.log('An error happened: ' + error);
          }
-     )*/
+     )
 
 
 }
@@ -127,7 +127,7 @@ function renderObj(loader: OBJLoader, scene: THREE.Scene) {
             console.log('An error happened' + error);
         }
     );
-}
+}*/
 
 //FIX THIS WITH A VALID FBX FILE. BUILT IN PARSER IS VERY PICKY
 function render_fbx(loader: FBXLoader, scene: THREE.Scene, name: String) {
@@ -251,15 +251,15 @@ export class SimpleRender extends react.Component<any, any>{
         const matloader = new MTLLoader();
 
         // SKYBOX/FOG
-        var materialArray: THREE.MeshBasicMaterial[] = [];
-        materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_bk.png') }));
-        materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_dn.png') }));
-        materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_ft.png') }));
-        materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_lf.png') }));
-        materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_rt.png') }));
-        materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_up.png') }));
-        for (var i = 0; i < 6; i++)
-            materialArray[i].side = THREE.BackSide;
+        //var materialArray: THREE.MeshBasicMaterial[] = [];
+        //materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_bk.png') }));
+        //materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_dn.png') }));
+        //materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_ft.png') }));
+        //materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_lf.png') }));
+        //materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_rt.png') }));
+        //materialArray.push(new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('./skybox/cave3_up.png') }));
+        //for (var i = 0; i < 6; i++)
+        //    materialArray[i].side = THREE.BackSide;
         //var skyboxMaterial = new THREE.Mesh(materialArray)
         //var skyboxGeom = new THREE.BoxGeometry(10000, 10000, 10000);
         //var skybox = new THREE.Mesh(skyboxGeom, materialArray);
@@ -273,9 +273,6 @@ export class SimpleRender extends react.Component<any, any>{
         mesh.rotation.x = - Math.PI / 2;
         //mesh.receiveShadow = true;
         scene.add(mesh);
-
-
-
 
         camera.position.set(0, 0, 300)
         //camera.position.z = 20;
