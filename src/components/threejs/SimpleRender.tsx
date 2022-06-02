@@ -5,7 +5,7 @@ import { ObjectControls } from 'threejs-object-controls';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
-import { Camera, MeshBasicMaterial, TextureLoader, Vector3 } from 'three';
+import { Camera, LoopPingPong, MeshBasicMaterial, TextureLoader, Vector3 } from 'three';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import Stats from 'three/examples/jsm/libs/stats.module'
 //import meobject from './meobject.obj'
@@ -155,6 +155,8 @@ function render_fbx(loader: FBXLoader, scene: THREE.Scene, name: String) {
         const animationAction = mixer.clipAction(
             (object as THREE.Object3D).animations[0]
         )
+        console.log(animationAction)
+
         //animationActions.push(animationAction)
         //animationsFolder.add(animations, 'default')
         //activeAction = animationActions[0]
@@ -165,7 +167,10 @@ function render_fbx(loader: FBXLoader, scene: THREE.Scene, name: String) {
         var camera_pivot = new THREE.Object3D()
         camera.lookAt(object.position)
         camera_pivot.add(object)
-        animationAction.play()
+        animationAction.loop = THREE.LoopPingPong
+        animationAction
+            .startAt(2)
+            .play();
         scene.add(object);
 
         //controls = new Orbi
@@ -261,7 +266,7 @@ export class SimpleRender extends react.Component<any, any>{
         //scene.add(skybox);
         //console.log(skybox)
 
-        var skybox = new THREE.CubeTextureLoader().load(["./skybox/cave3_bk.png", "./skybox/cave3_lf.png", "./skybox/cave3_lf.png", "./skybox/cave3_rt.png", "./skybox/cave3_up.png", "./skybox/cave3_dn.png"])
+        var skybox = new THREE.CubeTextureLoader().load(["./skybox/cave3_lf.png", "./skybox/cave3_lf.png", "./skybox/cave3_lf.png", "./skybox/cave3_lf.png", "./skybox/cave3_lf.png", "./skybox/cave3_lf.png"])
         scene.background = skybox
 
         var mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(10000, 10000), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
@@ -306,7 +311,7 @@ export class SimpleRender extends react.Component<any, any>{
             //camera.position.x += (mouseX - camera.position.x) * 0.02;
             //camera.position.y += (- mouseY - camera.position.y) * 0.02;
 
-            console.log(mouseX + " ::: " + window.innerWidth / 2 / 2 / 2)
+            //console.log(mouseX + " ::: " + window.innerWidth / 2 / 2 / 2)
             if (mouseX > (window.innerWidth / 2) / 2 / 2) {
                 camera.rotateOnAxis(Y_AXIS, 0.001)
             } else if (mouseX < (window.innerWidth / 2) / 2 / 2) {
