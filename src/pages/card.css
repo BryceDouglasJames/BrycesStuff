@@ -1,0 +1,46 @@
+/*.projcard{
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 150px;
+  width: 100px;
+  background: #191919;
+  border-radius: 10px;
+  overflow: hidden;
+}*/
+
+.projcard{
+    place-items: center;
+    position: relative;
+    height: auto;
+    width: auto;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .projcard::before {
+    content:'';
+    height: 400%;
+    width: 100%;
+    left: 10px;
+    top: -40px;
+    position: absolute;
+    background: linear-gradient(#70c9d3, fuchsia);
+    animation-name: ani;
+    animation-timing-function: linear;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes ani {
+      0%{ transform:rotate(0deg); }
+      100%{ transform:rotate(360deg); }
+  }
+  
+  .projcard::after{
+    content:'';
+    background: #191919;
+    position: absolute;
+    border-radius: 5px;
+    inset: 3px;
+  }

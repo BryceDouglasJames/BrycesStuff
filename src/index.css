@@ -16,17 +16,5 @@ code {
 		monospace;
 }
 
-@keyframes scroll {
-    from {
-        transform: translate(-70vw,0)
-    }
-    to {
-       transform: translate(100vw,0)
-    }
-}
 
-.constructionMarquee {
-	color: white;
-    animation: scroll 10s linear 0s infinite;
-    position: absolute;
-}
+

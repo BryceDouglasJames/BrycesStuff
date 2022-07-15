@@ -1,3 +1,8 @@
+html{
+  background-color: #171717;
+  height: 100vh;
+}
+
 .title{
   background-image: linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.95) 70%, #020202), url("https://www.kew.org/sites/default/files/2019-07/Holwick%20June%202011%20R%20Barrett.jpg");
   width: 100vw;
@@ -63,9 +68,60 @@
 }
 
 .phone-frame{
+  width: auto;
+  height: auto;
   position: relative;
   z-index: 100;
+  animation: fade 1.9s linear;
+  opacity: 0.1;
 }
+@keyframes fade {
+  /*0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }*/
+
+  to{
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+.constructionMarquee {
+    color: white;
+    position: sticky;
+    animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+    to {
+       transform: translate(100vw,0)
+    }
+}
+
+::-webkit-scrollbar {
+  background: currentcolor;
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: currentcolor;
+}
+
+:root * {
+  /* Pause the animation */
+  animation-play-state: paused;
+  /* Bind the animation to scroll */
+  animation-delay: calc(var(--scroll) * -1.3s);
+  /* These last 2 properites clean up overshoot weirdness */
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+  
+}
+
 
 .footer{
   width: 100vw;
