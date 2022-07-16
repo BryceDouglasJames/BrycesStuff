@@ -48,7 +48,6 @@ export class Navbar extends React.Component<{}, ToggleState> {
                             <Link to="/">
                                 <a
                                     className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
-                                    href="#pablo"
                                 >
                                     Home
                                 </a>
@@ -58,7 +57,6 @@ export class Navbar extends React.Component<{}, ToggleState> {
                             <Link to="projects">
                                 <a
                                     className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
-                                    href="#pablo"
                                 >
                                     Projects
                                 </a>
@@ -68,7 +66,6 @@ export class Navbar extends React.Component<{}, ToggleState> {
                             <Link to="/coolstuff/home">
                                 <a
                                     className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
-                                    href="#pablo"
                                 >
                                     Neat Stuff
                                 </a>
@@ -78,7 +75,6 @@ export class Navbar extends React.Component<{}, ToggleState> {
                             <Link to="/about">
                                 <a
                                     className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
-                                    href="#pablo"
                                 >
                                     About
                                 </a>
