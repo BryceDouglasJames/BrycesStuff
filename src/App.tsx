@@ -34,7 +34,7 @@ export default function App(): JSX.Element {
     };
 
     window.addEventListener('scroll', handleScroll);
-    console.log(getScrollPosition);
+    //console.log(getScrollPosition);
     let inner = getWindowDimensions().height;
     let num = new Number(getScrollPosition / ((document.body.offsetHeight - inner)));
     document.body.style.setProperty('--scroll', num.toString());

@@ -1,16 +1,14 @@
-import react, { useState } from 'react';
+import react from 'react';
 import * as THREE from 'three';
 // @ts-ignore
 import { ObjectControls } from 'threejs-object-controls';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
-import { Camera, LoopPingPong, Mesh, MeshBasicMaterial, TextureLoader, Vector3 } from 'three';
+import { TextureLoader, Vector3 } from 'three';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-import Stats from 'three/examples/jsm/libs/stats.module'
-import { Footer } from '../../pages/Footer';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Watch } from 'react-loader-spinner'
+
 //import meobject from './meobject.obj'
 
 //FOR ANIMATIONS
@@ -42,96 +40,29 @@ const orb = new OrbitControls(camera, renderer.domElement)
 
 type ToggleState = {
     toggled: boolean;
+    loading: boolean;
 };
 
-//FIX THIS WITH A VALID FBX FILE. BUILT IN PARSER IS VERY PICKY
-function render_fbx(loader: FBXLoader, scene: THREE.Scene, name: string) {
-    loader.load("big_walk.fbx", function (object) {
-        object.name = name;
-        object.scale.set(0.3, 0.3, 0.3);
-        //object.mixer = new THREE.AnimationMixer( object );
-        mixer = new THREE.AnimationMixer(object)
-        const tLoader = new THREE.TextureLoader();
-        tLoader.load("man_color.jpg", function (texture) {
-            object.traverse(function (child) {
-                let node = child as THREE.Mesh;
-                if (node.isMesh) {
-                    let mat = node.material as THREE.MeshStandardMaterial
-                    mat.map = texture
-                }
-                child = node
-            });
-        }, undefined, function (err) {
-            console.log(err);
-        });
-        object_map.set(name, object);
-        //camera.position.y = 50 - Math.sin(45)
-        //camera.zoom = -5
-        object.visible = true
-        const animationAction = mixer.clipAction(
-            (object as THREE.Object3D).animations[0]
-        )
-        console.log(animationAction)
 
-        //animationActions.push(animationAction)
-        //animationsFolder.add(animations, 'default')
-        //activeAction = animationActions[0]
-        //animationAction.reset()
-        //animationAction.fadeIn(1)
-        orb.update()
-        object.position.set(0, 0, 0)
-        var camera_pivot = new THREE.Object3D()
-        camera.lookAt(object.position)
-        camera_pivot.add(object)
-        animationAction.loop = THREE.LoopPingPong
-        animationAction
-            .startAt(2)
-            .play();
-        scene.add(object);
-        object_map.set(name, object);
 
-        //controls = new Orbi
-        //controls = new ObjectControls(camera, renderer.domElement, object);
-        //controls.setDistance(8, 200); // set min - max distance for zoom
-        //controls.setZoomSpeed(1); // set zoom speed
-
-        //controls.enableVerticalRotation();
-        //ontrols.setMaxVerticalRotationAngle(Math.PI / 4, Math.PI / 4);
-        //controls.setRotationSpeed(0.05);
-
-        //var camera_pivot = new THREE.Object3D()
-        //var Y_AXIS = new THREE.Vector3(0, 1, 0)
-        //camera_pivot.rotateOnAxis(Y_AXIS, 0.01)
-        //scene.add(camera_pivot)
-        modelReady = true
-    }, function (xhr) {
-        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-    }, function (error) {
-        console.log('An error happened: ' + error as String);
-    })
-}
 export class SimpleRender extends react.Component<any, ToggleState>{
     tempObj!: THREE.Group;
     mount: HTMLDivElement | HTMLCanvasElement | null | undefined;
     constructor(props: any) {
         super(props);
         this.tempObj = new THREE.Group();
-        //this.state = {
-        //    view: null
-        //};
-
-        console.log(mouseX);
-        console.log(mouseY);
+        //console.log(mouseX);
+        //console.log(mouseY);
     }
 
+
+    //controls for collapsing animation canvas
     state: ToggleState = {
-        toggled: true
+        toggled: true,
+        loading: true
     };
-
     public toggle = this.state.toggled;
-
     public CollapseCanvas() {
-
         this.toggle = !this.toggle;
         this.setState({
             toggled: this.toggle
@@ -139,8 +70,53 @@ export class SimpleRender extends react.Component<any, ToggleState>{
         this.forceUpdate();
     }
 
-    componentDidUpdate() {
 
+    public loadAnimationToCanvas() {
+        this.setState({
+            loading: true
+        })
+        camera.position.set(0, 60, 100)
+        let iterator = object_map.entries();
+        let obj = iterator.next();
+        if (scene.getObjectByName('homie') !== undefined) {
+            return;
+        }
+        scene.remove(obj.value[1]);
+        object_map.clear();
+        this.render_fbx(aniloader, scene, "homie")
+    }
+
+
+    public loadModelOneToCanvas() {
+
+        camera.position.set(0, 0, 300)
+        let iterator = object_map.entries();
+        let obj = iterator.next();
+        if (scene.getObjectByName('angel') !== undefined) {
+            return;
+        }
+        this.setState({
+            loading: true
+        })
+        scene.remove(obj.value[1]);
+        object_map.clear();
+        this.renderObj_With_Texture(ObjLoad, scene, matloader, 'angel')
+    }
+
+    public loadModelTwoToCanvas() {
+
+        camera.position.set(0, 0, 300)
+        let iterator = object_map.entries();
+        let obj = iterator.next();
+        if (scene.getObjectByName('field_me') !== undefined) {
+            return;
+        }
+        this.setState({
+            loading: true
+        })
+        scene.remove(obj.value[1]);
+        object_map.clear();
+        this.renderObj_With_Texture(ObjLoad, scene, matloader, 'field_me')
     }
 
     componentDidMount() {
@@ -149,6 +125,7 @@ export class SimpleRender extends react.Component<any, ToggleState>{
         //ATTATCH RENDERER TO WINDOW
         renderer.setSize(window.innerWidth / 1.5, window.innerHeight / 1.5);
         renderer.domElement.className = 'grid h-screen place-items-center content-start m-auto p-6'
+
         this.mount?.appendChild(renderer.domElement);
 
 
@@ -171,7 +148,7 @@ export class SimpleRender extends react.Component<any, ToggleState>{
         //set camera atrributes
         camera.position.set(0, 0, 300)
         camera.position.y = 15 * Math.sin(-450)
-        orb.autoRotate = true
+        orb.autoRotate = false
         orb.autoRotateSpeed = 0.1
 
         //for debugging axes location
@@ -201,7 +178,7 @@ export class SimpleRender extends react.Component<any, ToggleState>{
         //TODO schedule different renders once user selects different button options through callback functions
         //render_fbx(aniloader, scene, "homie")
         //renderObj(ObjLoad, scene);
-        renderObj_With_Texture(ObjLoad, scene, matloader, 'angel')
+        this.renderObj_With_Texture(ObjLoad, scene, matloader, 'angel')
         //scene.add(test);
 
     }
@@ -216,7 +193,11 @@ export class SimpleRender extends react.Component<any, ToggleState>{
         var draw = function (this: any) {
             requestAnimationFrame(draw);
             orb.update()
-            if (modelReady) mixer.update(clock.getDelta())
+
+            if (scene.getObjectByName('homie') !== undefined) {
+                mixer.update(clock.getDelta())
+            }
+
             renderer.render(scene, camera);
             if (mouseX > (window.innerWidth / 2) / 2 / 2) {
                 camera.rotateOnAxis(Y_AXIS, 0.001)
@@ -249,50 +230,51 @@ export class SimpleRender extends react.Component<any, ToggleState>{
             orb.autoRotate = !orb.autoRotate;
         }
 
-        const loadAnimationToCanvas = () => {
-            camera.position.set(0, 60, 100)
-            let iterator = object_map.entries();
-            let obj = iterator.next();
-            if (scene.getObjectByName('homie') !== undefined) {
-                return;
-            }
-            scene.remove(obj.value[1]);
-            object_map.clear();
-            render_fbx(aniloader, scene, "homie")
-        }
-
-        const loadModelOneToCanvas = () => {
-            camera.position.set(0, 0, 300)
-            let iterator = object_map.entries();
-            let obj = iterator.next();
-            if (scene.getObjectByName('angel') !== undefined) {
-                return;
-            }
-            scene.remove(obj.value[1]);
-            object_map.clear();
-            renderObj_With_Texture(ObjLoad, scene, matloader, 'angel')
-        }
 
         document.getElementById('root')?.addEventListener('mousemove', MouseMove)
         draw();
 
-        const { toggled } = this.state;
+        const { toggled, loading } = this.state;
 
         return (
             <>
                 <div className={'grid grid-rows-auto content-start'}>
-                    <div className={(toggled ? '' : 'hidden')} ref={mount => { this.mount = mount }} id="render" onMouseMove={MouseMove}></div>
+                    {loading ?
+                        <div className='m-auto items-center	' style={{ width: window.innerWidth / 1.5, height: window.innerHeight / 1.5, textAlign: 'center', alignContent: "center" }}>
+
+                            <div className='grid grid-cols-3 gap-4 content-center' style={{ textAlign: "center", fontSize: "60px", color: "white" }}>
+                                <h1>||</h1>
+                                <Watch
+                                    height={window.innerHeight / 3}
+                                    width={window.innerWidth / 3}
+                                    radius="48"
+                                    color="#caeaff"
+                                    ariaLabel="watch-loading"
+                                    wrapperStyle={{}}
+                                    visible={true}
+                                />
+                                <h1>||</h1>
+                            </div>
+                            <h1 className="" style={{ color: "white", fontSize: "35px", fontFamily: "roboto" }}>LOOOOOADING...</h1>
+                        </div>
+                        :
+                        <></>
+                    }
+                    <div className={(!loading || !toggled ? '' : 'hidden')} ref={mount => { this.mount = mount }} id="render" onMouseMove={MouseMove}></div>
+
                 </div>
+
+
                 {toggled ?
                     <div className={'grid grid-rows-auto content-start'}>
                         <div className="inline-flex gap-4 m-auto">
-                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={loadAnimationToCanvas}>
+                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => this.loadAnimationToCanvas()}>
                                 Animation
                             </button>
-                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={loadModelOneToCanvas}>
+                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => this.loadModelOneToCanvas()}>
                                 Model #1
                             </button>
-                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => this.loadModelTwoToCanvas()}>
                                 Model #2
                             </button>
                         </div>
@@ -310,7 +292,7 @@ export class SimpleRender extends react.Component<any, ToggleState>{
                     <>
                         <br></br><br></br>
                         <button className="grid bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold p-2 rounded m-auto" onClick={() => { this.CollapseCanvas(); }}>
-                            Show 3D stuff :p
+                            Show Controls
                         </button>
                     </>
 
@@ -326,9 +308,9 @@ export class SimpleRender extends react.Component<any, ToggleState>{
                         width: '80%'
                     }}
                 />
-                <div className="grid p-10 m-auto justify-center w-70 m-auto" style={{ fontSize: "140%" }}>
+                <div className="grid p-10 m-auto justify-center w-70 m-auto" style={{ fontSize: "140%", textAlign: "center" }}>
                     <div>
-                        <img src="https://media-exp1.licdn.com/dms/image/C4D35AQH_kS3WtJU07A/profile-framedphoto-shrink_200_200/0/1612392489291?e=1658545200&v=beta&t=fmUgAG6x_6Xamec1tCPQFl5sQuCB_1adU1n0_wYzasg" className="h-45 w-45 rounded-full m-auto" alt="author"></img>
+                        <img className="m-auto" style={{ borderRadius: "100%" }} src="pfp.jpeg"></img>
                     </div>
                     <h1 className="m-auto pt-3 font-body text-4xl font-semibold text-primary dark:text-white md:text-5xl lg:text-6xl">
                         Soooooo what's up? Hope you like it here :3
@@ -345,46 +327,132 @@ export class SimpleRender extends react.Component<any, ToggleState>{
             </>
         );
     }
-}
 
+    public renderObj_With_Texture(loader: OBJLoader, scene: THREE.Scene, matloader: MTLLoader, name: string) {
+        matloader
+            .load(name + ".mtl",
+                (material) => {
+                    console.log(material)
+                    material.preload()
+                    loader
+                        .setMaterials(material)
+                        .load(
+                            name + '.obj',
+                            (object) => {
+                                object.name = name;
+                                object.scale.set(80, 80, 80);
+                                object.position.set(0, -125, 0);
+                                var axis = new THREE.Vector3(4, 0, 7).normalize();
+                                var speed = 0.01;
+                                //object.rotateOnAxis(axis, speed);
+                                //return object;
+                                scene.add(object);
+                                object_map.set(name, object);
+                                //controls = new ObjectControls(camera, renderer.domElement, object);
+                                //controls.setDistance(8, 200); // set min - max distance for zoom
+                                //controls.setZoomSpeed(0.7); // set zoom speed
+                                //controls.enableVerticalRotation();
+                                //controls.setMaxVerticalRotationAngle(Math.PI / 4, Math.PI / 4);
+                                //controls.setRotationSpeed(0.05);
+                                setTimeout(() => {
+                                    this.setState({
+                                        loading: false
+                                    })
+                                }, 2000);
+                            }, undefined, (err) => {
+                                console.log(err)
+                            }
+                        )
+                },
+            )
 
+    }
 
-
-
-
-function renderObj_With_Texture(loader: OBJLoader, scene: THREE.Scene, matloader: MTLLoader, name: string) {
-    matloader
-        .load("angel.mtl",
-            (material) => {
-                console.log(material)
-                material.preload()
-                loader
-                    .setMaterials(material)
-                    .load(
-                        'angel.obj',
-                        (object) => {
-                            object.name = name;
-                            object.scale.set(80, 80, 80);
-                            object.position.set(0, -125, 0);
-                            var axis = new THREE.Vector3(4, 0, 7).normalize();
-                            var speed = 0.01;
-                            //object.rotateOnAxis(axis, speed);
-                            //return object;
-                            scene.add(object);
-                            object_map.set(name, object);
-                            //controls = new ObjectControls(camera, renderer.domElement, object);
-                            //controls.setDistance(8, 200); // set min - max distance for zoom
-                            //controls.setZoomSpeed(0.7); // set zoom speed
-                            //controls.enableVerticalRotation();
-                            //controls.setMaxVerticalRotationAngle(Math.PI / 4, Math.PI / 4);
-                            //controls.setRotationSpeed(0.05);
-                        }, undefined, (err) => {
-                            console.log(err)
+    //FIX THIS WITH A VALID FBX FILE. BUILT IN PARSER IS VERY PICKY
+    public render_fbx(loader: FBXLoader, scene: THREE.Scene, name: string) {
+        loader.load("big_walk.fbx",
+            (object) => {
+                object.name = name;
+                object.scale.set(0.3, 0.3, 0.3);
+                //object.mixer = new THREE.AnimationMixer( object );
+                mixer = new THREE.AnimationMixer(object)
+                const tLoader = new THREE.TextureLoader();
+                tLoader.load("man_color.jpg", function (texture) {
+                    object.traverse(function (child) {
+                        let node = child as THREE.Mesh;
+                        if (node.isMesh) {
+                            let mat = node.material as THREE.MeshStandardMaterial
+                            mat.map = texture
                         }
-                    )
-            }
-        )
+                        child = node
+                    });
+                }, undefined, function (err) {
+                    console.log(err);
+                });
+                object_map.set(name, object);
+                //camera.position.y = 50 - Math.sin(45)
+                //camera.zoom = -5
+                object.visible = true
+                const animationAction = mixer.clipAction(
+                    (object as THREE.Object3D).animations[0]
+                )
+                //console.log(animationAction)
+
+                //animationActions.push(animationAction)
+                //animationsFolder.add(animations, 'default')
+                //activeAction = animationActions[0]
+                //animationAction.reset()
+                //animationAction.fadeIn(1)
+                orb.update()
+                object.position.set(0, 0, 0)
+                var camera_pivot = new THREE.Object3D()
+                camera.lookAt(object.position)
+                camera_pivot.add(object)
+                animationAction.loop = THREE.LoopPingPong
+                animationAction
+                    .startAt(2)
+                    .play();
+                scene.add(object);
+                object_map.set(name, object);
+
+                //controls = new Orbi
+                //controls = new ObjectControls(camera, renderer.domElement, object);
+                //controls.setDistance(8, 200); // set min - max distance for zoom
+                //controls.setZoomSpeed(1); // set zoom speed
+
+                //controls.enableVerticalRotation();
+                //ontrols.setMaxVerticalRotationAngle(Math.PI / 4, Math.PI / 4);
+                //controls.setRotationSpeed(0.05);
+
+                //var camera_pivot = new THREE.Object3D()
+                //var Y_AXIS = new THREE.Vector3(0, 1, 0)
+                //camera_pivot.rotateOnAxis(Y_AXIS, 0.01)
+                //scene.add(camera_pivot)
+                //modelReady = true
+
+
+                setTimeout(() => {
+                    this.setState({
+                        loading: false
+                    })
+                }, 2000);
+            }, function (xhr) {
+                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+            }, function (error) {
+                console.log('An error happened: ' + error as String);
+            })
+    }
+
 }
+
+
+
+
+
+
+
+
+
 
 
 /*
