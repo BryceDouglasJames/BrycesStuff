@@ -266,17 +266,18 @@ export class SimpleRender extends react.Component<any, ToggleState>{
 
 
                 {toggled ?
-                    <div className={'grid grid-rows-auto content-start'}>
-                        <div className="inline-flex gap-4 m-auto">
-                            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => this.loadAnimationToCanvas()}>
-                                Animation
-                            </button>
+                    <div className={'grid grid-rows-auto content-start p-2'}>
+                        <div className="inline-flex gap-6 m-auto">
                             <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => this.loadModelOneToCanvas()}>
                                 Model #1
                             </button>
                             <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => this.loadModelTwoToCanvas()}>
                                 Model #2
                             </button>
+                        </div>
+                        <br></br>
+                        <div className="inline-flex gap-6 m-auto p-4">
+                            <hr></hr>
                         </div>
                         <br></br>
                         <div className="inline-flex gap-4 m-auto">
@@ -308,9 +309,9 @@ export class SimpleRender extends react.Component<any, ToggleState>{
                         width: '80%'
                     }}
                 />
-                <div className="grid p-10 m-auto justify-center w-70 m-auto" style={{ fontSize: "140%", textAlign: "center" }}>
+                <div className="grid p-10 m-auto justify-center w-70 m-auto" style={{ fontSize: "140%", textAlign: "center", color: "white" }}>
                     <div>
-                        <img className="m-auto" style={{ borderRadius: "100%" }} src="pfp.jpeg"></img>
+                        <img className="m-auto" style={{ borderRadius: "100%" }} src="pfp.jpeg" alt = "pfp"></img>
                     </div>
                     <h1 className="m-auto pt-3 font-body text-4xl font-semibold text-primary dark:text-white md:text-5xl lg:text-6xl">
                         Soooooo what's up? Hope you like it here :3

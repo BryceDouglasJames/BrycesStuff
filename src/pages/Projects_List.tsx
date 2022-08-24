@@ -1,8 +1,9 @@
+/* eslint-disable react/style-prop-object */
+/* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import { Projects_Row } from "./Project_Row";
 import "./Project_Style.css"
 import phone from "./phone_frame.png"
-import { Set } from "typescript";
 
 
 export class ProjectsList extends React.Component<any, any> {

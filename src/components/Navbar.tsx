@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React from "react";
 import { Link } from 'react-router-dom'
 
 type ToggleState = {
@@ -63,7 +63,7 @@ export class Navbar extends React.Component<{}, ToggleState> {
                             </Link>
                         </li>
                         <li className="nav-item m-auto p-auto">
-                            <Link to="/coolstuff/home">
+                            <Link to="/coolstuff">
                                 <a
                                     className="px-3 py-2 flex text-lg font-bold text-white hover:opacity-75"
                                 >

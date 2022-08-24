@@ -14,6 +14,7 @@ import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound';
 import { ProjectsList } from './pages/Projects_List'
 import { Footer } from './pages/Footer';
+import { CoolStuff } from './pages/CoolStuff';
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -36,6 +37,7 @@ export default function App(): JSX.Element {
     window.addEventListener('scroll', handleScroll);
     //console.log(getScrollPosition);
     let inner = getWindowDimensions().height;
+    // eslint-disable-next-line no-new-wrappers
     let num = new Number(getScrollPosition / ((document.body.offsetHeight - inner)));
     document.body.style.setProperty('--scroll', num.toString());
     return () => window.removeEventListener('scroll', handleScroll);
@@ -48,6 +50,8 @@ export default function App(): JSX.Element {
           <Navbar></Navbar>
           <Routes>
             <Route path="/" element={<Home />}>
+            </Route>
+            <Route path="/coolstuff" element={<CoolStuff></CoolStuff>}>
             </Route>
             <Route path="/projects" element={<ProjectsList></ProjectsList>}>
             </Route>

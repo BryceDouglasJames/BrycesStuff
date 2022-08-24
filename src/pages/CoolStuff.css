@@ -1,0 +1,109 @@
+.cooltitle{
+    background-image: linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.95) 70%, #020202), url("https://img.wallpapic.com/i9824-639-913/thumb/forest-old-growth-nature-green-wallpaper.jpg");
+    width: 100vw;
+    height: 65vh;
+    background-position: top;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0px 50px 20px #000000;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+  
+  .cooltitle h1{
+    position: absolute;
+    top: 25vh;
+    left: 50vw;
+    transform: translate(-50%, -50%); 
+    letter-spacing: 0.2rem;
+    font-size: 1.7rem;
+    color: white;
+    text-shadow: 2px 2px 5px;
+    text-transform: uppercase;
+  }
+  
+
+  .stuffbutton{
+    border-radius: 5px;
+    background: black;
+    place-items: center;
+    cursor: pointer;
+    padding: 10px;
+    letter-spacing: 0.2rem;
+    font-size: 1.3rem;
+    color: white;
+    text-shadow: 2px 2px 5px;
+    text-transform: uppercase;
+  }
+
+  .coolsearch{
+    border-radius: 5px;
+    background-color: #020202;
+    padding: none;
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+
+  .coolsearch :is(input, button){
+    color: inherit;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+
+  .coolsearchfield{
+    width: 0;
+    transition: width .5s;
+  }
+
+  .coolsearch:focus-within input{
+    width: 100%;
+    padding: 20px;
+    margin-left: 30px;
+  }
+
+  ::placeholder{
+    color:inherit;
+  }
+
+  .coolcard{
+    color: white;
+    place-items: center;
+    position: relative;
+    display: flex;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    letter-spacing: 0.1rem;
+    font-size: 1.1rem;
+    text-align: center;
+    
+  }
+  
+  .coolcard::before {
+    content:'';
+    height: 400%;
+    width: 100%;
+    left: 10px;
+    top: -40px;
+    position: absolute;
+    background: linear-gradient(#70c9d3, fuchsia);
+    animation-name: ani;
+    animation-timing-function: linear;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes ani {
+      0%{ transform:rotate(0deg); }
+      100%{ transform:rotate(360deg); }
+  }
+  
+  .coolcard::after{
+    content:'';
+    background: #191919;
+    position: absolute;
+    border-radius: 5px;
+    inset: 3px;
+  }
