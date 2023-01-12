@@ -27,19 +27,13 @@ export class Projects_Row extends React.Component<item>{
                         <div className="snap-start flex justify-evenly text-white z-10 w-75 m-auto">{this.props.description}</div>
                     </div>
                     <br></br>
-                    <div className="grid grid-cols-2 w-100 z-10">
+                    <div className="grid grid-cols-1 w-100 z-10">
                         <button
                             className="border items-center justify-center border-solid rounded bg-white p-3 m-auto text-black"
                             type="button"
                             onClick={this.goToLiveDemo}
                             style={{ width: "80%" }}
                         >See live demo</button>
-                        <button
-                            className="border items-center justify-center border-solid rounded bg-white p-3 m-auto text-black"
-                            type="button"
-                            onClick={this.goToLiveDemo}
-                            style={{ width: "80%" }}
-                        >View code</button>
                     </div>
                     <br></br>
                     <hr

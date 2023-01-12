@@ -15,6 +15,51 @@ html{
   text-align: center;
 }
 
+.other_title{
+  background-image: linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.95) 70%, #020202);
+  width: 100vw;
+  height: 30vh;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0px 50px 20px #000000;
+  padding-bottom: 30px;
+  text-align: center;
+  top: -10vh;
+}
+
+.other_title > h1{
+  position: absolute;
+  top: 25vh;
+  left: 50vw;
+  transform: translate(-50%, -50%); 
+  letter-spacing: 0.2rem;
+  font-size: 1.7rem;
+  color: white;
+  text-shadow: 2px 2px 5px;
+  text-transform: uppercase;
+}
+
+.final_title{
+  width: 100vw;
+  height: 30vh;
+  z-index: 2;
+  position: relative;
+  text-align: center;
+  top: -15vh;
+}
+
+.final_title > h1{
+  position: absolute;
+  top: 25vh;
+  left: 50vw;
+  transform: translate(-50%, -50%); 
+  letter-spacing: 0.2rem;
+  font-size: 1.7rem;
+  color: white;
+  text-shadow: 2px 2px 5px;
+  text-transform: uppercase;
+}
+
 .column {
   display: flex;
   flex-direction: column;
@@ -67,13 +112,49 @@ html{
   text-transform: uppercase;
 }
 
-.phone-frame{
+.phone-frame-1{
+  background: url('Mayhem_Video.mp4') no-repeat;
+  background-size:cover;
+  background-position-y: center;
+  background-position-x: center;
+  background-clip: content-box;
+  background-blend-mode:darken;
   width: auto;
   height: auto;
   position: relative;
   z-index: 100;
   animation: fade 1.9s linear;
-  opacity: 0.1;
+  opacity: 1;
+}
+
+.phone-frame-2{
+  background: url('BJAuto_video.mp4') no-repeat;
+  background-size:80%;
+  background-position-y: center;
+  background-position-x: center;
+  background-clip: content-box;
+  background-blend-mode:darken;
+  width: auto;
+  height: auto;
+  position: relative;
+  z-index: 100;
+  animation: fade 1.9s linear;
+  opacity: 1;
+}
+
+.phone-frame-3{
+  background: url('Goproj_Video.mp4') no-repeat;
+  background-size:180%;
+  background-position-y: center;
+  background-position-x: center;
+  background-clip: content-box;
+  background-blend-mode:darken;
+  width: auto;
+  height: auto;
+  position: relative;
+  z-index: 100;
+  animation: fade 1.9s linear;
+  opacity: 1;
 }
 @keyframes fade {
   /*0% {

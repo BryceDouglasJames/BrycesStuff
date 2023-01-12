@@ -3,6 +3,7 @@
 import react from "react";
 import "./CoolStuff.css"
 import { CoolStuff_Row } from "./CoolStuff_Row";
+import MAYHEM_ROW from './Mayhem_Title.svg'
 
 type PostState = {
     PostType: String
@@ -13,9 +14,10 @@ export class CoolStuff extends react.Component<any, PostState>{
     
     private posts = [
         {
-            name:"Test",
-            link:"https://google.com",
+            name:"Conceptual Mayhem",
+            link:"https://theworldkeepsstaringat.me",
             style:"col-span-1",
+            banner:"Mayhem_Title.svg",
             description:"Magnis dis parturient montes nascetur ridiculus mus. Amet consectetur adipiscing elit ut aliquam purus sit amet. Purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae. Integer enim neque volutpat ac. A iaculis at erat pellentesque adipiscing commodo elit at. Nibh praesent tristique magna sit amet purus. Tellus in metus vulputate eu. Pretium lectus quam id leo in vitae turpis massa. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi. Nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum. Eget mauris pharetra et ultrices neque ornare aenean.",
             category:"ARTICLE",
         },
@@ -87,7 +89,6 @@ export class CoolStuff extends react.Component<any, PostState>{
                 </div>
                 <br></br><br></br>
                 <div className="grid grid-row grid-row-wrap m-auto justify-items-center items-center p-6 align-center gap-20" style = {{width: "100%", borderRadius:"7px"}}>
-                            
                             {this.posts.map((post) =>{
                                 if(post.category.toString() === PostType.toString() || PostType.toString() === "ANY" || post.name.toLowerCase().includes(SearchField.toString().toLowerCase())
                                     || post.category.toLowerCase().includes(SearchField.toString().toLowerCase()) || post.description.toLowerCase().includes(SearchField.toString().toLowerCase())){
