@@ -21,7 +21,7 @@ export class Project_Card extends React.Component<card_content>{
     }else{
       window.open(_other_link);
     }
-    console.log(e);
+    //console.log(e);
   }
 
   render(): React.ReactNode {

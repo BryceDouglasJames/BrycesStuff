@@ -3,11 +3,12 @@
 import React from "react";
 import { Projects_Row } from "./Project_Row";
 import "./Project_Style.css";
-import phone from "./phone_frame.png";
-import scraper_photo from "./geniusandpython.png";
-import justforyouphoto from "./JustForYouHome.png";
-import facetofacephoto from "./facetofacephoto.png";
-import grep_photo from "./GREP_photo.png";
+import phone from "./assets/phone_frame.png";
+import scraper_photo from "./assets/geniusandpython.png";
+import justforyouphoto from "./assets/JustForYouHome.png";
+import facetofacephoto from "./assets/facetofacephoto.png";
+import grep_photo from "./assets/GREP_photo.png";
+
 import { Project_Card } from "./Project_Card";
 
 
@@ -26,16 +27,17 @@ export class ProjectsList extends React.Component<any, any> {
                             <div className="row p-2 lg:ml-10">
                                 <br></br><br></br><br></br>
                                 <div>
-                                    <img src="./Mayhem_Title.svg" alt="HELP"></img>
+                                    <img className = "m-auto" src="Mayhem_Title.svg" alt="HELP"></img>
                                     <br></br>
                                     <Projects_Row
                                         name="Conceptual Mayhem E-Commerce Platfrom"
                                         link="https://theworldkeepsstaringat.me"
                                         style="lg:col-span-2"
-                                        description="E-Commerce website developed to establish a collective platform for interacting with clients depicted
-                                        as a dynamic, abstract storefront for my clothing line. Currently, this website was made to be viewed on a mobile device. 
-                                        So, if you are viewing in a browser, switch to responsive view and refresh the page."
-                                        technologies={["ReactJS", "Netlify", "Figma", "PaypalAPI"]}>
+                                        description="This E-Commerce website was developed to provide a collective platform for customers to interact with my clothing line, showcasing a dynamic and abstract storefront. 
+                                        The website was optimized for mobile viewing, so for the best experience, please switch to responsive view and refresh the page when accessing on a browser. This project was an 
+                                        opportunity for me to express my personality and creativity, and I consider it more of an artistic expression than a traditional e-commerce platform. This
+                                        was also my first 'big' project as this taught me a lot about web development."
+                                        technologies={["ReactJS", "Netlify", "Figma", "PaypalAPI", "WebGL (Pre-recorded for adding outfit to 3-D model)", "Bootstrap"]}>
                                     </Projects_Row>
                                 </div>
                                 <br></br><br></br>
@@ -50,21 +52,21 @@ export class ProjectsList extends React.Component<any, any> {
                                 height: 2,
                             }}
                         />
-                        
+
                         <div className="lg:grid lg:grid-flow-col lg:grid-flow-col lg:gap-20 lg:content-start" style={{ backgroundColor: "#171717" }} >
                             <div className="row p-2 lg:ml-10">
                                 <br></br><br></br><br></br>
                                 <div>
-                                    <img src="./bjauto_text.svg" alt="HELP"></img>
+                                    <img className = "m-auto" src="NLP_Text.svg" alt="HELP"></img>
                                     <Projects_Row
-                                        name="BJ-Auto-Complete"
-                                        link="https://bjautocomplete.netlify.app"
+                                        name="Natural Language Lyric Generator"
+                                        link="http://nlp-lyric-generator.us-east-1.elasticbeanstalk.com"
                                         style="lg:col-span-2"
-                                        description="Website showcasing an autocomplete feature in the form of a suffix trie. This website was made in order 
-                                        to understand the trie data structure and learn some more typescript features. I also wanted to have some real-time lookup 
-                                        feature in order for users to see the availibale completion words based on their search parameter. This website includes a 
-                                        seach bar, the ability to manually add words, generate random words and delete the list of words to start fresh."
-                                        technologies={["ReactJS", "Typescript", "Netlify"]}>
+                                        description="This project, which was completed for a data science class, aimed to generate pseudo-lyrics that are similar to those of a specific artist chosen by the user. 
+                                        The project employed an N-Gram language model along with sentiment and topic analysis to achieve this goal. As part of the project requirements, we implemented a form of 
+                                        map-reduce in order to efficiently gather and partition data. However, for deployment purposes, we ultimately adopted a more general approach due to the limited scope of 
+                                        the project. Through this project, we gained valuable insights and experience in natural language processing, as well as in deploying and managing workflows in AWS."
+                                        technologies={["Python", "SKLearn", "Django", "Docker", "Hadoop", "AWS Elastic Beanstalk", "AWS Elastic Mapreduce", "NGINX"]}>
                                     </Projects_Row>
                                 </div>
                                 <br></br><br></br>
@@ -84,21 +86,50 @@ export class ProjectsList extends React.Component<any, any> {
                             <div className="row p-2 lg:ml-10">
                                 <br></br><br></br><br></br>
                                 <div>
-                                    <img src="./Goproj_Title.svg" alt="HELP"></img>
-                                    <br></br>
+                                    <img className = "m-auto" src="bjauto_text.svg" alt="HELP"></img>
                                     <Projects_Row
-                                        name="Hill Climbing Algorithm using Golang"
-                                        link="https://geneticalgos-production.up.railway.app"
+                                        name="BJ-Auto-Complete"
+                                        link="https://bjautocomplete.netlify.app"
                                         style="lg:col-span-2"
-                                        description="This project implements the hill climbing technique in an attempt to start expoloring the world of genetic algorithms.
-                                        I decided to use golang in order to get a better feel for it and experiment with more concepts, espcially its templating engine. 
-                                        This is a very simple example and whenever a user inputs 10 numbers, the algortithm will 'guess' the combination."
-                                        technologies={["Golang, Railway, Golang HTML Templates"]}>
+                                        description="This website features an autocomplete functionality implemented using a suffix trie data structure. It was created to gain a deeper understanding 
+                                        of the trie data structure and to learn more about the typescript language. The website includes a search bar that allows users to see available completion words 
+                                        in real-time, based on the user's search parameter. Additionally, the website also allows for manual word addition, generation of random words, and the ability 
+                                        to delete the current word list, providing a fresh start."
+                                        technologies={["ReactJS", "Typescript", "Netlify"]}>
                                     </Projects_Row>
                                 </div>
                                 <br></br><br></br>
                             </div>
                             <img className="phone-frame-3 lg:col-span-1 p-20 mb-full" src={phone} alt="phone1"></img>
+                        </div>
+                        <hr
+                            className="z-10 lg:mt-10 m-auto lg:mb-10 p-0 w-3/4"
+                            style={{
+                                color: "fuchsia",
+                                backgroundColor: "fuchsia",
+                                height: 2,
+                            }}
+                        />
+
+                        <div className="lg:grid lg:grid-flow-col lg:grid-flow-col lg:gap-20 lg:content-start" style={{ backgroundColor: "#171717" }} >
+                            <div className="row p-2 lg:ml-10">
+                                <br></br><br></br><br></br>
+                                <div>
+                                    <img className = "m-auto" src="Goproj_Title.svg" alt="HELP"></img>
+                                    <br></br>
+                                    <Projects_Row
+                                        name="Hill Climbing Algorithm using Golang"
+                                        link="https://geneticalgos-production.up.railway.app"
+                                        style="lg:col-span-2"
+                                        description="This project is an exploration of the field of genetic algorithms, utilizing the hill climbing technique. The project was implemented using Golang, 
+                                        allowing me to gain a deeper understanding of the language with an oddly practical example and experiment with its templating engine. It presents a simple example, where the 
+                                        algorithm attempts to 'guess' the combination of 10 numbers provided by the user."
+                                        technologies={["Golang, Railway.io"]}>
+                                    </Projects_Row>
+                                </div>
+                                <br></br><br></br>
+                            </div>
+                            <img className="phone-frame-4 lg:col-span-1 p-20 mb-full" src={phone} alt="phone1"></img>
                         </div>
                         <hr
                             className="z-10 lg:mt-10 m-auto lg:mb-10 p-0 w-3/4"
@@ -138,10 +169,9 @@ export class ProjectsList extends React.Component<any, any> {
                         ></Project_Card>
                         <Project_Card
                             title="Just For You"
-                            description="Project made for the software engineering course I took for my coursework. 
-                            We implemented a daily wellness tracker that users would answer questions based on health categories. 
-                            There is a forum system in which users can post updates a lot of data visualizations, a very crude authentication 
-                            system using providers, and a very simple regression model."
+                            description="This project was developed as part of a software engineering course, it is a daily wellness tracker that allows users to self-evaluate their health status by answering questions 
+                            related to different health categories. It includes a forum system where users can post updates, data visualization to better understand the data and a basic authentication system using providers. 
+                            Additionally, we implemented a simple regression model to better evaluate the data collected. "
                             other_links={["https://github.com/BryceDouglasJames/JustForYouAPI", "https://github.com/BryceDouglasJames/JustForYouClient"]}
                             other_names={["Just For You API", "Just For You Client"]}
                             link="https://www.youtube.com/watch?v=8uVdqslx5pw"

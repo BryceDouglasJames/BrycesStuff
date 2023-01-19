@@ -113,8 +113,8 @@ html{
 }
 
 .phone-frame-1{
-  background: url('Mayhem_Video.mp4') no-repeat;
-  background-size:cover;
+  background: url('./assets/Mayhem_Video.gif') no-repeat;
+  background-size:250% 78%;
   background-position-y: center;
   background-position-x: center;
   background-clip: content-box;
@@ -125,11 +125,12 @@ html{
   z-index: 100;
   animation: fade 1.9s linear;
   opacity: 1;
+  margin: auto;
 }
 
 .phone-frame-2{
-  background: url('BJAuto_video.mp4') no-repeat;
-  background-size:80%;
+  background: url('./assets/NLP_Video.gif') no-repeat;
+  background-size:200% 98%;
   background-position-y: center;
   background-position-x: center;
   background-clip: content-box;
@@ -140,11 +141,12 @@ html{
   z-index: 100;
   animation: fade 1.9s linear;
   opacity: 1;
+  margin: auto;
 }
 
 .phone-frame-3{
-  background: url('Goproj_Video.mp4') no-repeat;
-  background-size:180%;
+  background: url('./assets/BJAuto_Video.gif') no-repeat;
+  background-size:170% 198%;
   background-position-y: center;
   background-position-x: center;
   background-clip: content-box;
@@ -155,7 +157,27 @@ html{
   z-index: 100;
   animation: fade 1.9s linear;
   opacity: 1;
+  margin: auto;
 }
+
+.phone-frame-4{
+  background: url('./assets/Goproj_Video.gif') no-repeat;
+  background-size:180% 78%;
+  background-position-y: center;
+  background-position-x: center;
+  background-clip: content-box;
+  background-blend-mode:darken;
+  width: auto;
+  height: auto;
+  position: relative;
+  z-index: 100;
+  animation: fade 1.9s linear;
+  opacity: 1;
+  margin: auto;
+}
+
+
+
 @keyframes fade {
   /*0% {
     transform: translateY(50px);

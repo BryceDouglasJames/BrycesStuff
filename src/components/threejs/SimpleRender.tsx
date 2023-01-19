@@ -314,15 +314,16 @@ export class SimpleRender extends react.Component<any, ToggleState>{
                         <img className="m-auto" style={{ borderRadius: "100%" }} src="pfp.jpeg" alt = "pfp"></img>
                     </div>
                     <h1 className="m-auto pt-3 font-body text-4xl font-semibold text-primary dark:text-white md:text-5xl lg:text-6xl">
-                        Soooooo what's up? Hope you like it here :3
+                        Soooooo what's up?
                     </h1>
                     <p className="pt-3 font-body text-xl font-light text-primary dark:text-white m-auto">
-                        A 'software engineer' from 'Upstate' New York
+                        I am a 'software engineer' from 'Upstate' New York!
                     </p>
                     <br></br><br></br>
                     <h4 className="m-auto pt-3 font-body text-xxl font-light text-primary dark:text-white m-auto text-center">
-                        Always looking for new challenges, no matter what! Whether it'd be fixing X-Ray machines, sewing, or learning a new language, <br></br><br></br><h4 className='underline decoration-sky-500'> I'm all ears. </h4><br></br>
-                        If you want to learn a little more about me you can head to my about section. If you want to mess around with my little object renderer you can as well that'd be cool ;)
+                        I always find myself in the most random of activites, whether it be in the realm of fixing X-Ray machines, sewing, or even learning a new language. <br></br><br></br><h4 className='underline decoration-sky-500'> I am always open to new opportunities and experiences.</h4><br></br>
+                        If you would like to learn more about me, please feel free to visit my "About" section.  <br></br> <br></br>
+                        Also, if you're interested in experimenting with my object renderer above, that's cool too.  <br></br> <br></br> Have a great day :3
                     </h4>
                 </div>
             </>
